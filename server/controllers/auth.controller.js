@@ -30,3 +30,5 @@ export const logOut=async(req,res)=>{
         console.log(500).json({message:"Error in logout"})
     }
 }
+
+
