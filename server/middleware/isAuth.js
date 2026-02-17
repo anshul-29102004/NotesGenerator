@@ -1,4 +1,4 @@
-import jwt, { verify } from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 
 const isAuth=async(req,res,next)=>{
      try {
@@ -20,4 +20,3 @@ const isAuth=async(req,res,next)=>{
 
 export default isAuth;
 
-a
