@@ -13,7 +13,7 @@ const userSchema=new mongoose.Schema({
    },
    credits:{
     type:Number,
-    default:50,
+    default:1000,
     min:0,
    },
    isCreditAvailable:{
