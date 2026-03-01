@@ -1,9 +1,13 @@
 import express from "express"
-import isAuth from "../middleware/isAuth.js";
-import { pdfDownload } from "../controllers/pdf.controller.js";
+import isAuth from "../middleware/isAuth.js"
 
-const pdfRouter=express.Router();
+import { pdfDownload } from "../controllers/pdf.controller.js"
 
-pdfRouter.post("/generate-pdf",isAuth,pdfDownload);
 
-export default pdfRouter;
+
+const pdfRouter = express.Router()
+
+
+pdfRouter.post("/generate-pdf",isAuth,pdfDownload)
+
+export default pdfRouter

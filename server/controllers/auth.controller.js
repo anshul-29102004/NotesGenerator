@@ -1,34 +1,37 @@
-import UserModel from "../models/userModel.js"
+import UserModel from "../models/user.model.js"
 import { getToken } from "../utils/token.js"
 
-export const googleAuth=async(req,res)=>{
+
+export const googleAuth = async (req,res) => {
     try {
-        const {name,email}=req.body
-        let user=await UserModel.findOne({email})
+        
+        const {name , email} = req.body
+        let user = await UserModel.findOne({email})
         if(!user){
-            user=await UserModel.create({name,email})
+            user = await UserModel.create({
+                name , email
+            })
         }
-        let token=await getToken(user._id)
-        res.cookie("token",token,{
-          httpOnly:true,
-          secure:false,
-          samesite:"strict",
-          maxAge:7*24*60*60*1000,
+        let token = await getToken(user._id)
+        res.cookie("token" , token , {
+            httpOnly:true,
+            secure:true,
+            samesite:"none",
+            maxAge:7 * 24 * 60 * 60 * 1000
+
         })
         return res.status(200).json(user)
     } catch (error) {
-        return res.status(500).json({message:`googleSignup ${error}`})
+        return res.status(500).json({message:`googleSignup Error  ${error}`})
     }
+    
 }
 
-
-export const logOut=async(req,res)=>{
+export const logOut = async (req,res) => {
     try {
         await res.clearCookie("token")
-        return res.status(200).json({message:"Logout successfully"})
+         return res.status(200).json({message:"LogOut Successfully"})
     } catch (error) {
-        console.log(500).json({message:"Error in logout"})
+        return res.status(500).json({message:`Logout Error  ${error}`})
     }
 }
-
-
